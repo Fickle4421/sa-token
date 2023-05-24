@@ -1,5 +1,8 @@
 package com.fic.controller;
 
+import cn.dev33.satoken.annotation.SaCheckLogin;
+import cn.dev33.satoken.annotation.SaCheckSafe;
+import cn.dev33.satoken.annotation.SaIgnore;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.StrUtil;
 import com.fic.bean.User;
@@ -15,6 +18,7 @@ import java.util.Map;
  * @create 2023-05-24 10:38
  */
 @RestController
+@SaCheckLogin
 @RequestMapping("user")
 public class UserController {
 
@@ -22,6 +26,7 @@ public class UserController {
      * 登陆
      */
     @RequestMapping("doLogin")
+    @SaIgnore
     public Map<String,Object> doLogin(@RequestBody User user){
 
         if (StrUtil.equals(user.getUsername(),"root") && StrUtil.equals(user.getPassword(),"4421")){
@@ -86,6 +91,47 @@ public class UserController {
             put("当前账号是否含有指定权限, 如果验证未通过，则抛出异常: NotPermissionException ","checkPermission  checkPermissionOr  checkPermissionAnd");
             StpUtil.checkPermission("start");
             put("当前账号是否含有指定角色","start");
+        }};
+    }
+
+
+    /**
+     * 踢人下线
+     */
+    @RequestMapping("kickOut")
+    public Map<String,Object> kickOut(@RequestBody User user){
+
+        StpUtil.kickout(user.getUserID());
+
+        return new HashMap<>(){{
+            put("result","success");
+        }};
+    }
+
+
+    /**
+     * 开启二级认证
+     */
+    @RequestMapping("openTwoSafe")
+    public Map<String,Object> openTwoSafe(){
+
+        StpUtil.openSafe(20);
+
+        return new HashMap<>(){{
+            put("result","success");
+        }};
+    }
+
+    /**
+     * 开启二级认证
+     */
+    @RequestMapping("add")
+    @SaCheckSafe()
+    public Map<String,Object> add(@RequestBody User user){
+
+
+        return new HashMap<>(){{
+            put("result","success");
         }};
     }
 

@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * 全局异常拦截
  * @author fickle
  * @create 2023-05-24 11:53
  */
