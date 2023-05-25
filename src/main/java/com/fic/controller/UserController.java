@@ -7,6 +7,7 @@ import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.StrUtil;
 import com.fic.bean.User;
 import com.fic.common.ResultApi;
+import com.fic.common.ResultData;
 import com.fic.common.ResultStatus;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -59,21 +60,23 @@ public class UserController {
      * 注销登陆
      */
     @RequestMapping("outLogin")
-    public Map<String,Object> outLogin(){
+    public ResultData<?> outLogin(){
         StpUtil.logout();
-        return new HashMap<>(){{
-            put("result","注销成功");
-        }};
+        ResultData<Object> success = ResultData.success(null);
+        ResultData<Object> objectResultData = new ResultData<>();
+        System.out.println("aasdasdasd"+objectResultData.getTimestamp());
+        ResultApi resultApi = new ResultApi();
+        System.out.println("aaaaaaaaaaaaa"+resultApi.getTimestamp());
+        String timestamp = success.getTimestamp();
+        return ResultData.success(null);
     }
 
     /**
      * 查看token信息
      */
     @RequestMapping("getTokenInfo")
-    public Map<String,Object> getTokenInfo(){
-        return new HashMap<>(){{
-            put("result",StpUtil.getTokenInfo());
-        }};
+    public ResultData<?> getTokenInfo(){
+        return ResultData.success(StpUtil.getTokenInfo());
     }
 
 
