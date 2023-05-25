@@ -1,4 +1,4 @@
-package com.fic.exception;
+package com.fic.handler;
 
 import cn.dev33.satoken.exception.NotPermissionException;
 import cn.dev33.satoken.exception.NotRoleException;

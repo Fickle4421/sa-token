@@ -6,6 +6,8 @@ import cn.dev33.satoken.annotation.SaIgnore;
 import cn.dev33.satoken.stp.StpUtil;
 import cn.hutool.core.util.StrUtil;
 import com.fic.bean.User;
+import com.fic.common.ResultApi;
+import com.fic.common.ResultStatus;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -113,13 +115,14 @@ public class UserController {
      * 开启二级认证
      */
     @RequestMapping("openTwoSafe")
-    public Map<String,Object> openTwoSafe(){
+    public ResultApi openTwoSafe(){
 
         StpUtil.openSafe(20);
 
-        return new HashMap<>(){{
-            put("result","success");
-        }};
+        return ResultApi.builder()
+                .code(ResultStatus.SUCCESS.getCode())
+                .message(ResultStatus.SUCCESS.getMessage())
+                .build();
     }
 
     /**

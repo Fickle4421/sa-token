@@ -1,4 +1,4 @@
-package com.fic.service.impl;
+package com.fic.satoken;
 
 import cn.dev33.satoken.stp.StpInterface;
 import org.springframework.stereotype.Service;
