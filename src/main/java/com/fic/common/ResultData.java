@@ -1,10 +1,12 @@
 package com.fic.common;
 
+import cn.hutool.core.date.DatePattern;
+import cn.hutool.core.date.DateUtil;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -12,6 +14,7 @@ import java.util.Date;
  * @create 2023-05-25 17:59
  */
 @Data
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(callSuper = true)
@@ -21,9 +24,9 @@ public class ResultData<T> extends ResultApi implements Serializable {
 
     private static final long serialVersionUID = 1111111221111111L;
 
+    @Builder
     public ResultData(Integer code, String message, Boolean flag , T data){
-        super(code,message,flag
-        );
+        super(code,message,flag, DateUtil.format(new Date(),DatePattern.NORM_DATETIME_MS_PATTERN));
         this.data = data;
     }
 

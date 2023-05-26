@@ -30,30 +30,26 @@ public class UserController {
      */
     @RequestMapping("doLogin")
     @SaIgnore
-    public Map<String,Object> doLogin(@RequestBody User user){
+    public ResultData<?> doLogin(@RequestBody User user){
 
         if (StrUtil.equals(user.getUsername(),"root") && StrUtil.equals(user.getPassword(),"4421")){
             StpUtil.login(user.getUserID());
-            return new HashMap<>(){{
-                put("result","登陆成功");
-            }};
+            return ResultData.success(null);
         }
-        return new HashMap<>(){{
-            put("result","登陆失败");
-        }};
+        return ResultData.error(null);
     }
 
     /**
      * 是否登陆
      */
     @RequestMapping("isLogin")
-    public Map<String,Object> isLogin(){
-        return new HashMap<>(){{
+    public ResultData<Map<String,Object>> isLogin(){
+        return ResultData.success(new HashMap<>(){{
             put("isLogin",StpUtil.isLogin());
 
             if (StpUtil.isLogin())
                 put("userID",StpUtil.getLoginId());
-        }};
+        }});
     }
 
     /**
@@ -62,12 +58,6 @@ public class UserController {
     @RequestMapping("outLogin")
     public ResultData<?> outLogin(){
         StpUtil.logout();
-        ResultData<Object> success = ResultData.success(null);
-        ResultData<Object> objectResultData = new ResultData<>();
-        System.out.println("aasdasdasd"+objectResultData.getTimestamp());
-        ResultApi resultApi = new ResultApi();
-        System.out.println("aaaaaaaaaaaaa"+resultApi.getTimestamp());
-        String timestamp = success.getTimestamp();
         return ResultData.success(null);
     }
 

@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
@@ -15,18 +16,12 @@ import java.util.Date;
  * @create 2023-05-24 16:41
  */
 @Data
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class ResultApi implements Serializable {
 
     private static final long serialVersionUID = 1111111222111111L;
-
-    public ResultApi(Integer code, String message, Boolean flag){
-        this.code = code;
-        this.message = message;
-        this.flag = flag;
-    }
 
     private Integer code;
 
